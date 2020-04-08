@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Message Sequence</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/dcf-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="center">
+        <h1>DCF255 - TCP Protocol</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="center">
+        <ul>
+          <li><a href="index.html">What is TCP</a></li>
+          <li><a href="format.html">TCP Segment format</a></li>
+          <li><a href="type.html">TCP Segment type</a></li>
+          <li><a href="sequence.html">Message Sequence</a></li>
+          <li><a href="connection.html">Type of Connection</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section class="main center">
+        <!-- Start your code here -->
+
+        <h2>4. Message Sequence</h2>
+
+        <div id="tcp_connection_establish">
+          <h3>4.1. Establishing a Connection (TCP 3-way Handshaking)</h3>
+
+          <img src="img/tcp_connection_establish.jpg" alt="Establishing a Connection (TCP 3-way Handshaking)">
+          <figcaption>Picture 4-1</figcaption>
+          <p>
+            <strong>[STEP #1]</strong><br>
+            The client sends a SYN packet to request a connection to the server. after sending the SYN packet, the client state changes to SYN-SENT to wait a SYN+ACK.
+          </p>
+          <p>
+            <strong>[STEP #2]</strong><br>
+            When the server receives the SYN request, the server sends ACK with SYN flag, that has a purpose to confirm the SYN and wait an ACK of the client. The server state will be changed to SYN_RECEIVED at the last.
+          </p>
+          <p>
+            <strong>[STEP #3]</strong><br>
+            After the client sends an ACK to the server, a connection is established between the client and the server and the data transmission is available. The both client and server state are ESTABLISHED.
+          </p>
+        </div>
+
+        <br>
+
+        <div id="tcp_connection_terminate">
+          <h3>4.2. Terminating a Connection</h3>
+
+          <img src="img/tcp_connection_terminate.jpg" alt="Terminating a Connection">
+          <figcaption>Picture 4-2</figcaption>
+
+          <p>
+            <strong>[STEP #1]</strong><br>
+            The client sends a FIN packet to terminate the existing connection with the server.
+          </p>
+          <p>
+            <strong>[STEP #2]</strong><br>
+            The server sends an ACK packet to client to confirm the FIN and waits for finishing some data exchange to the client under the TIME_WAIT state (server state).
+          </p>
+          <p>
+            <strong>[STEP #3]</strong><br>
+            When finishing the data exchange to the client, the server sends FIN packet to client to notice the existing connection was closed.
+          </p>
+          <p>
+            <strong>[STEP #4]</strong><br>
+            The client sends an ACK for the FIN of the step #3.<br>
+            What if some data packet of the server on the step #3 is delayed caused by a routing problem of packet missing? So, the data packet can be arrived later than FIN of step #3, the data packet that arrived after the connection is closed, will be dropped or missing. Client keeps the existing connection with TIME_WAIT (client state) for some period (default 240 seconds) against this case even if the client receives the FIN packet.
+          </p>
+          <br>
+        </div>
+
+        <!-- End your code here  -->
+      </section>
+    </main>
+
+    <footer>
+      <div class="center">
+        &copy; 2020 Group No.10, Jaemo Yang, Aima Azhar, Naveed Danish
+      </div>
+    </footer>
+  </body>
+</html>

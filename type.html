@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Type of Connection</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/dcf-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="center">
+        <h1>DCF255 - TCP Protocol</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="center">
+        <ul>
+          <li><a href="index.html">What is TCP</a></li>
+          <li><a href="format.html">TCP Segment format</a></li>
+          <li><a href="type.html">TCP Segment type</a></li>
+          <li><a href="sequence.html">Message Sequence</a></li>
+          <li><a href="connection.html">Type of Connection</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section class="main center">
+        <!-- Start your code here -->
+
+        <h2>3. TCP Segment type</h2>
+        <p>One of the most significant features of TCP segments is that those are developed to carry both control information and data simultaneously.</br>
+          This feature decreases the number of segments sent, because a segment can execute more than one operation.
+        </p>
+
+        <h3> 3.1 Control TCP Segments</h3>
+        
+        <p>Control bits fields of the TCP header are set to indicate the communication of control information such as manipulate connection establishment, connection termination, connection abortion, flow control, mode of transfer etc.
+        </p>
+        
+        <div id="control_tcp_segments">
+          <table>
+            <tr>
+              <th>Subfield Name</th>
+              <th>Bits</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>URG</td>
+              <td>1</td>
+              <td>
+                Urgent pointer. This bit is responsible to be forwarded to the application layer urgently, even if there is more data left to be forwarded. This pointer notifies the receiver to process the urgent packets before any other packets. The receiver gets notified when packets have been received by the receiver.</td>
+            </tr>
+            <tr>
+              <td>ACK</td>
+              <td>1</td>
+              <td>
+                Acknowledgement number.
+                When set to 1, denotes that this segment has an acknowledgment, and carrying the next sequence wanted from the destination of this segment.
+                </td>
+            </tr>
+            <tr>
+              <td>PSH</td>
+              <td>1</td>
+              <td>
+                Request for push.
+                It allows the application to send the data even if the buffer is not full. when set to 1, indicates that the TCP pushes the data immediately.
+                </td>
+            </tr>
+            <tr>
+              <td>RST</td>
+              <td>1</td>
+              <td> Reset the connection. If the sender encountered a problem with the TCP connection, It is used to terminate the connection. This can be sent from the receiver’s side when a packet is sent to a wrong address or host.</td>
+            </tr>
+            <tr>
+              <td>SYN</td>
+              <td>1</td>
+              <td>
+                Synchronize sequence numbers.
+This segment is a request to synchronize sequence numbers and establish a connection; This bit contains the sequence number of the first byte sent.
+</td>
+            </tr>
+            <tr>
+              <td>FIN</td>
+              <td>1</td>
+              <td>Terminate the connection.
+                This bit is used to request the termination of the connection. Applications use FIN bit to close the TCP connection in one direction to terminate the connection.
+                </td>
+            </tr>
+
+          </table>
+          <figcaption>Table 3-1</figcaption>
+        </div>
+
+        <div id="data_tcp_segment">
+          <h3> 3.2 Data TCP Segments</h3>
+          <p>The TCP segment consists of the TCP header that is referred to as "segment header", and the payload, data, or "segment data of various size".</p>
+          <p>The Picture 3-1 shows that a TCP segment which contains the real bytes of data being sent between devices and the data offset field indicates the start position of the data is offset from the beginning of the TCP segment simultaneously.</p>
+
+          <img src="img/data_tcp_segment.jpg" alt="Data TCP Segment">
+          <figcaption>Picture 3-1</figcaption>
+
+        </div>
+        </br></br>
+        <!-- End your code here  -->
+      </section>
+    </main>
+
+    <footer>
+      <div class="center">
+        &copy; 2020 Group No.10, Jaemo Yang, Aima Azhar, Naveed Danish
+      </div>
+    </footer>
+  </body>
+</html>

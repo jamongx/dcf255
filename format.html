@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TCP Segment format</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/dcf-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="center">
+        <h1>DCF255 - TCP Protocol</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="center">
+        <ul>
+          <li><a href="index.html">What is TCP</a></li>
+          <li><a href="format.html">TCP Segment format</a></li>
+          <li><a href="type.html">TCP Segment type</a></li>
+          <li><a href="sequence.html">Message Sequence</a></li>
+          <li><a href="connection.html">Type of Connection</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section class="main center">
+         <!-- Start your code here -->
+
+         <div id="tcp_segment_format">
+          <h2>2. TCP Segment</h2>
+          <p>
+            TCP messages are called segments, the name describes the fact that each is a part of the entire data stream between
+            the devices. TCP segments are flexible and are utilized for various purposes. A one field format is used for all
+            segments, with several header fields that perform the many functions and features for which TCP is in charge.
+          </p>
+
+          <h3>2.1 TCP Segment format</h3>
+
+          <p>
+            Header minimum size is 20 bytes and the maximum are 60 bytes.
+          </p>
+
+          <img src="img/tcp_segment_format.jpg" alt="TCP Segment Format">
+          <figcaption>Picture 2-1</figcaption>
+
+        </div>
+
+        </br></br>
+
+        <div id="tcp_segment_descriptions">
+          <h3>2.2 TCP Segment field descriptions</h3>
+
+          <table>
+            <tr>
+              <th>Field Name</th>
+              <th>Size (Bits)</th> 
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>Source Port</td>
+              <td>16</td>
+              <td>The port number of the process which is sending the TCP segment on a source device.</td>
+            </tr>
+            <tr>
+              <td>Destination Port</td>
+              <td>16</td>
+              <td>The port number of the process which is receiving the TCP segment on a destination device.</td>
+            </tr>
+            <tr>
+              <td>Sequence <br> Number</td>
+              <td>32</td>
+              <td> For regular transmissions, this is the sequence number of the first byte of data in this segment. </br>
+                It is used to reassemble the message at the receiving end if the segments are received out of order.</td>
+            </tr>
+            <tr>
+              <td>Acknowledgement <br> Number</td>
+              <td>32</td>
+              <td>When the ACK bit is set, this segment is acting as an acknowledgment, </br>
+                and this field contains the sequence number the source is next expecting the destination to send.</td>
+            </tr>
+            <tr>
+              <td>Data Offset</td>
+              <td>4</td>
+              <td>The number of 32-bit words in the TCP Header. This indicates where the data starts; </br>
+                in other words, an offset from the beginning of the TCP segment.</td>
+            </tr>
+            <tr>
+              <td>Reserved</td>
+              <td>6</td>
+              <td>Reserved for future use, must be filled with zero.</td>
+            </tr>
+            <tr>
+              <td>Control Bits</td>
+              <td>6</td> 
+              <td>There are six kind of 1-bit Control Bits that regulate connection establishment, connection termination, </br>
+                connection abortion, flow control, mode of transfer etc. The 6 bits are described in chapter 3.1.</td>
+            </tr>
+            <tr>
+              <td>Window</td>
+              <td>16</td> 
+              <td>This indicates the bytes of data the sender of this segment is willing to accept from the receiver at one time. </br>
+                This generally represents to the size of the buffer assigned to accept data for this connection.</td>
+            </tr>
+            <tr>
+              <td>Checksum</td>
+              <td>16</td> 
+              <td>It is used to preserve the TCP segment against errors in transmission. </br>
+                This is a checksum for data integrity protection, computed over the TCP datagram. </br>
+                In addition to, a special pseudo header of fields.</td>
+            </tr>
+            <tr>
+              <td>Urgent Pointer</td>
+              <td>16</td> 
+              <td>This is used in relation with the URG control bit for priority data transfer. </br>
+                This field contains the sequence number of the last byte of urgent data.</td>
+            </tr>
+            <tr>
+              <td>Opinion</td>
+              <td>Variable</td> 
+              <td>TCP has a common mechanism for including one or more sets of optional data in a TCP segment. </br>
+                Each of the options can be either one byte in length or variable in length. </br>
+                The first byte is the option-kind sub-field, and its value defines the type of option, </br>
+                which indicates whether the option is just a single byte or multiple bytes at the same time.</td>
+            </tr>
+            <tr>
+              <td>Padding</td>
+              <td>Variable</td> 
+              <td>If the options field is not a multiple of 32 bits in length, </br>
+                necessary zeros are added to pad the header, </br>
+                so the size of the TCP header become a multiple of 32 bits.</td>
+            </tr>
+            <tr>
+              <td>Data</td>
+              <td>Variable</td> 
+              <td>This is the bytes of data being sent in the segment.</td>
+            </tr>
+          </table>
+          <figcaption>
+            Table 2-1
+          </figcaption>
+          
+          </br></br></br>
+        </div>
+         <!-- End your code here  -->
+      </section>
+    </main>
+
+    <footer>
+      <div class="center">
+        &copy; 2020 Group No.10, Jaemo Yang, Aima Azhar, Naveed Danish
+      </div>
+    </footer>
+  </body>
+</html>
